@@ -5,6 +5,8 @@ import {
   FastifyReply,
 } from "fastify";
 
+import { CreateCustomersController } from "./controllers/CreateCustomersController";
+
 export async function routes(
   fastify: FastifyInstance,
   options: FastifyPluginOptions
@@ -15,4 +17,8 @@ export async function routes(
       return { ok: true };
     }
   );
+
+  fastify.post("/customer", async (request: FastifyRequest, reply: FastifyReply) => {
+    return new CreateCustomersController().handler(request, reply)
+  });
 }
